@@ -1,0 +1,10 @@
+Оптимизирующий компилятор Microsoft (R) C/C++ версии 19.38.33145 для x64
+(C) Корпорация Майкрософт (Microsoft Corporation).  Все права защищены.
+
+webui.cpp
+Microsoft (R) Incremental Linker Version 14.38.33145.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:webui.exe 
+/OUT:C:\Users\egrsk\Desktop\Jarvis\App\bin\webui.exe 
+webui.obj 

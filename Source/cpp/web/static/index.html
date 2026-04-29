@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.A.R.V.I.S</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="launcher" class="launcher">
+    <div class="launcher-card">
+        <h1>J.A.R.V.I.S</h1>
+        <button id="activateJarvis">Активировать</button>
+    </div>
+</div>
+
+<div id="mainApp" class="jarvis-container hidden">
+    <div class="header">
+        <div></div>
+        <div class="title"><h1>J.A.R.V.I.S</h1></div>
+        <div class="status-badge">
+            <div class="status-led"></div>
+            <div class="status-text" id="statusLabel">Активен</div>
+            <div class="settings-btn" id="settingsBtn">⚙</div>
+        </div>
+    </div>
+
+    <canvas id="reactorCanvas"></canvas>
+    <div class="chat-area" id="chatArea">
+        <div class="message jarvis-message">
+            <div class="bubble">Сэр, я готов к работе.</div>
+        </div>
+    </div>
+
+    <div class="control-panel">
+        <div class="input-group">
+            <textarea id="userInput" rows="1" placeholder="Сообщение..."></textarea>
+            <button id="sendBtn">Отправить</button>
+        </div>
+    </div>
+</div>
+
+<!-- Панель настроек -->
+<div id="settingsPanel" class="settings-panel hidden">
+    <div class="settings-header">
+        <span>Настройки</span>
+        <span class="settings-close" id="settingsClose">✕</span>
+    </div>
+    <div class="settings-body">
+        <div class="setting-item">
+            <label>
+                <input type="checkbox" id="showLogs" checked>
+                Показывать логи
+            </label>
+        </div>
+        <div class="setting-item">
+            <label for="voiceSelect">Голос:</label>
+            <select id="voiceSelect">
+                <option value="windows" selected>Windows TTS (быстрый)</option>
+                <option value="voxcpm">VoxCPM2 (идеальный)</option>
+            </select>
+        </div>
+        <div class="setting-item">
+            <label for="modelSelect">Модель LLM:</label>
+            <select id="modelSelect">
+                <option value="llama3.1:8b" selected>Llama 3.1 8B</option>
+                <option value="phi3:mini">Phi-3 Mini</option>
+                <option value="qwen2.5:7b">Qwen 2.5 7B</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Панель логов -->
+<div id="logPanel" class="log-panel">
+    <div class="log-header" id="logHeader">
+        <span>J.A.R.V.I.S Logs</span>
+        <span class="log-close" id="logClose">✕</span>
+    </div>
+    <div class="log-area" id="logArea"></div>
+</div>
+
+<script src="reactor.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

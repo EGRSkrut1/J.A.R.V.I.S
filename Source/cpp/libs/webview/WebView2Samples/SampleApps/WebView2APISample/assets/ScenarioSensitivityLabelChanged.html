@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Sensitivity Label API Sample</title>
+    <link rel="stylesheet" href="ScenarioSensitivityLabelChanged.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sensitivity Label API Sample</h1>
+
+        <!-- Info box for the feature -->
+        <div class="info-box">
+            <h3>About This Sample</h3>
+            <p>This sample demonstrates how to use the <strong>PageInteractionRestrictionManager API</strong> to add and remove sensitivity labels, which triggers the <strong>SensitivityInfoChanged</strong> event in WebView2.</p>
+        </div>
+
+        <!-- Status box for API availability -->
+        <div id="pirmStatus" class="status-box">
+            <h3>API Status</h3>
+            <p id="pirmStatusText">Checking PageInteractionRestrictionManager availability...</p>
+        </div>
+
+        <!-- Form for adding sensitivity labels -->
+        <div class="form-container">
+            <h3>Add Sensitivity Label</h3>
+            <label for="labelId">Label ID GUID:</label>
+            <input type="text" id="labelId" placeholder="12345678-1234-1234-1234-123456789abc" />
+
+            <label for="orgId">Organization ID GUID:</label>
+            <input type="text" id="orgId" placeholder="87654321-4321-4321-4321-cba987654321" />
+
+            <button onclick="addLabel()">Add Label</button>
+        </div>
+
+        <!-- Form for removing sensitivity labels -->
+        <div class="form-container">
+            <h3>Remove Sensitivity Label</h3>
+            <label for="labelSelect">Select Label to Remove:</label>
+            <select id="labelSelect">
+                <option value="">No labels available</option>
+            </select>
+
+            <button onclick="removeLabel()">Remove Label</button>
+        </div>
+
+        <!-- Logs of actions -->
+        <div>
+          <h3>Last Operation Status</h3>
+          <p id="output" class="output"></p>
+        </div>
+
+        <!-- Code sample for API usage -->
+        <div class="code-sample">
+            <h3>API Usage</h3>
+            <pre>
+// Add a sensitivity label
+const labelManager = await navigator.pageInteractionRestrictionManager.requestLabelManager();
+const label = await labelManager.addLabel('MicrosoftSensitivityLabel', {
+    label: 'your-label-guid',
+    organization: 'your-org-guid'
+});
+
+// Remove a sensitivity label
+await label.remove();
+            </pre>
+        </div>
+    </div>
+
+    <script src="ScenarioSensitivityLabelChanged.js"></script>
+</body>
+</html>

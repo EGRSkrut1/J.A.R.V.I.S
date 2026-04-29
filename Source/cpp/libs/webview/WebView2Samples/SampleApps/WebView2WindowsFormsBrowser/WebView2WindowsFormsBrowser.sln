@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebView2WindowsFormsBrowser", "WebView2WindowsFormsBrowser.csproj", "{86BC1812-7A58-43C1-B0BB-D8EC7AC1A2CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug Experimental APIs|Any CPU = Debug Experimental APIs|Any CPU
+		Debug Stable APIs|Any CPU = Debug Stable APIs|Any CPU
+		Release Experimental APIs|Any CPU = Release Experimental APIs|Any CPU
+		Release Stable APIs|Any CPU = Release Stable APIs|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86BC1812-7A58-43C1-B0BB-D8EC7AC1A2CF}.Debug Experimental APIs|Any CPU.ActiveCfg = Debug Experimental APIs|Any CPU
+		{86BC1812-7A58-43C1-B0BB-D8EC7AC1A2CF}.Debug Experimental APIs|Any CPU.Build.0 = Debug Experimental APIs|Any CPU
+		{86BC1812-7A58-43C1-B0BB-D8EC7AC1A2CF}.Debug Stable APIs|Any CPU.ActiveCfg = Debug Stable APIs|Any CPU
+		{86BC1812-7A58-43C1-B0BB-D8EC7AC1A2CF}.Debug Stable APIs|Any CPU.Build.0 = Debug Stable APIs|Any CPU
+		{86BC1812-7A58-43C1-B0BB-D8EC7AC1A2CF}.Release Experimental APIs|Any CPU.ActiveCfg = Release Experimental APIs|Any CPU
+		{86BC1812-7A58-43C1-B0BB-D8EC7AC1A2CF}.Release Experimental APIs|Any CPU.Build = Release Experimental APIs|Any CPU
+		{86BC1812-7A58-43C1-B0BB-D8EC7AC1A2CF}.Release Stable APIs|Any CPU.ActiveCfg = Release Stable APIs|Any CPU
+		{86BC1812-7A58-43C1-B0BB-D8EC7AC1A2CF}.Release Stable APIs|Any CPU.Build.0 = Release Stable APIs|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0260E91B-A0AA-47C4-BAB0-B51495EF6029}
+	EndGlobalSection
+EndGlobal

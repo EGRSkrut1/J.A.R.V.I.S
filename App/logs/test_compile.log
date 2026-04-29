@@ -1,0 +1,13 @@
+Оптимизирующий компилятор Microsoft (R) C/C++ версии 19.38.33145 для x64
+(C) Корпорация Майкрософт (Microsoft Corporation).  Все права защищены.
+
+test_runner.cpp
+Microsoft (R) Incremental Linker Version 14.38.33145.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:test_runner.exe 
+/LIBPATH:C:\dev\vcpkg\installed\x64-windows\lib 
+libcurl.lib 
+ws2_32.lib 
+/OUT:C:\Users\egrsk\Desktop\Jarvis\App\bin\test_runner.exe 
+test_runner.obj 

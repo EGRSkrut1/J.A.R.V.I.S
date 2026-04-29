@@ -1,0 +1,60 @@
+Оптимизирующий компилятор Microsoft (R) C/C++ версии 19.38.33145 для x64
+(C) Корпорация Майкрософт (Microsoft Corporation).  Все права защищены.
+
+main.cpp
+jarvis_app.cpp
+config_manager.cpp
+logger.cpp
+voice_logger.cpp
+activation_controller.cpp
+vosk_recognizer.cpp
+windows_tts.cpp
+voxcpm_tts.cpp
+hybrid_tts_manager.cpp
+ollama_client.cpp
+context_manager.cpp
+joke_provider.cpp
+system_info.cpp
+greeting_provider.cpp
+text_input.cpp
+browser_control.cpp
+spotify_controller.cpp
+module_manager.cpp
+http_server.cpp
+Создание кода...
+Компиляция...
+websocket_server.cpp
+Создание кода...
+Microsoft (R) Incremental Linker Version 14.38.33145.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:main.exe 
+/LIBPATH:C:\dev\vcpkg\installed\x64-windows\lib 
+libcurl.lib 
+ws2_32.lib 
+winmm.lib 
+ole32.lib 
+uuid.lib 
+sapi.lib 
+/OUT:C:\Users\egrsk\Desktop\Jarvis\App\bin\jarvis_client.exe 
+main.obj 
+jarvis_app.obj 
+config_manager.obj 
+logger.obj 
+voice_logger.obj 
+activation_controller.obj 
+vosk_recognizer.obj 
+windows_tts.obj 
+voxcpm_tts.obj 
+hybrid_tts_manager.obj 
+ollama_client.obj 
+context_manager.obj 
+joke_provider.obj 
+system_info.obj 
+greeting_provider.obj 
+text_input.obj 
+browser_control.obj 
+spotify_controller.obj 
+module_manager.obj 
+http_server.obj 
+websocket_server.obj 

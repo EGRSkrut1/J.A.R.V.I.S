@@ -1,0 +1,22 @@
+.vs/
+obj/
+*/Generated Files/
+AppPackages/
+BundleArtifacts/
+WinRTAdapter/x64/
+x64/
+
+# Created by running event monitor
+enc_temp_folder/
+packages/
+
+# Override root .gitignore to ensure we pick up changes for the sample app
+!*.sln
+!*.csproj
+!*.vcxproj
+!*.vcxproj.filters
+!*.props
+
+# Make sure script debug config is checked in for vendor testing
+!.vscode
+
