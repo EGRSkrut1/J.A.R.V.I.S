@@ -1,38 +1,63 @@
-# J.A.R.V.I.S — голосовой ассистент
+# J.A.R.V.I.S - Voice Assistant
 
-Голосовой ассистент с распознаванием речи, интеграцией с LLM и управлением приложениями.
+Voice assistant with speech recognition, LLM integration, and app management.
 
-## Стек
+## Stack
 
 - C++17, MSVC
-- Vosk (распознавание речи)
-- Windows TTS + VoxCPM2 (синтез речи)
+- Vosk (speech recognition)
+- Windows TTS + VoxCPM2 (speech synthesis)
 - Ollama + llama3.1:8b (LLM)
-- cpp-httplib (веб-сервер)
-- HTML/CSS/JS (фронтенд)
+- cpp-httplib (web server)
+- HTML/CSS/JS (frontend)
 
-## Команды
+## Commands
 
-«пошути», «анекдот» - Шутка,
-«музыка», «открой Spotify» - Запуск Spotify,
-«любимые треки» = Сохранённые треки,
-«дальше» / «пауза» = Управление,
-«включи/выключи перемешивание» = Перемешивание, 
-«громкость [0-100]» = Громкость Spotify,
-«браузер», «открой браузер» = Запуск браузера, 
-«найди [запрос]» = Поиск в Google,
-«доступные команды» = Справка,
-Остальные вопросы - LLM.
+"joke", "anecdote" - Joke,
+"music", "open Spotify" - Launch Spotify,
+"favorite tracks" = Saved tracks,
+"next" / "pause" = Control,
+"turn on/off shuffle" = Shuffle,
+"volume [0-100]" = Spotify volume,
+"browser", "open browser" = Launch browser,
+"find [query]" = Google search,
+"available commands" = Help,
+Other questions - LLM.
 
-## Запуск
+## Launching
 
-1. Установить Ollama: `ollama pull llama3.1:8b`
-2. Установить зависимости: `pip install vosk pyaudio websockets`
-3. Запустить `1startjarvis.bat` (администратор)
+1. Install Ollama: `ollama pull llama3.1:8b`
+2. Install dependencies: `pip install vosk pyaudio websockets`
+3. Run `1startjarvis.bat` (administrator)
 
-## Известные проблемы
+## Known issues
 
-- Пути захардкожены!
-- VoxCPM2 отключён (долгая загрузка 30-90 сек)
-- LLM без интернета, иногда галлюцинирует
-- Vosk иногда буферизирует команды
+- Paths are hardcoded!
+- VoxCPM2 is disabled (long loading time of 30-90 seconds)
+- LLM without internet, sometimes hallucinates
+- Vosk sometimes buffers commands
+
+## License
+```
+MIT License
+
+Copyright (c) 2026 EGRSKRUT
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+---
