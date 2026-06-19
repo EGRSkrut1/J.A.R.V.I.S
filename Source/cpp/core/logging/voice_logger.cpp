@@ -1,4 +1,5 @@
 #include "voice_logger.h"
+#include "core/config/paths.h"
 #include <fstream>
 #include <sstream>
 #include <chrono>
@@ -6,7 +7,7 @@
 #include <iostream>
 
 static std::string getLogPath() {
-    return "C:\\Users\\egrsk\\Desktop\\Jarvis\\App\\logs\\voice.log";
+    return Paths::getLogsDir() + "/voice.log";
 }
 
 void VoiceLogger::userSpeech(const std::string& text) {

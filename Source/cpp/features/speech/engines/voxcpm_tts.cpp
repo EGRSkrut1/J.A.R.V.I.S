@@ -1,4 +1,5 @@
 #include "voxcpm_tts.h"
+#include "core/config/paths.h"
 #include "core/logging/logger.h"
 #include <curl/curl.h>
 #include <thread>
@@ -47,7 +48,8 @@ struct VoxCPMTTS::Impl {
     void playAudioFile(const std::string& path) {
         if (path.empty()) return;
         
-        std::string cmd = "C:\\Users\\egrsk\\Desktop\\jarvis\\Services\\TTS\\VoxCPM2\\ffmpeg\\ffplay.exe -autoexit -nodisp -loglevel quiet \"" + path + "\"";
+        std::string ffplay = Paths::getVoxCPMDir() + "/ffmpeg/ffplay.exe";
+        std::string cmd = "\"" + ffplay + "\" -autoexit -nodisp -loglevel quiet \"" + path + "\"";
         isPlaying = true;
         system(cmd.c_str());
         isPlaying = false;

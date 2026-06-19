@@ -20,8 +20,8 @@ FFmpeg: Локальный портативный
 ========================================
 
 [VoxCPM2] Device: NVIDIA GeForce RTX 4060 | VRAM: 8.6 GB
-C:\Users\egrsk\Desktop\Jarvis\Services\TTS\VoxCPM2\app.py:2124: UserWarning: The parameters have been moved from the Blocks constructor to the launch() method in Gradio 6.0: head. Please pass these parameters to launch() instead.
+C:\Users\egrsk\Documents\GitHub\J.A.R.V.I.S\Services\TTS\VoxCPM2\app.py:2124: UserWarning: The parameters have been moved from the Blocks constructor to the launch() method in Gradio 6.0: head. Please pass these parameters to launch() instead.
   with gr.Blocks(
 * Running on local URL:  http://127.0.0.1:7860
 * To create a public link, set `share=True` in `launch()`.
-^CTerminate batch job (Y/N)? 
+^C

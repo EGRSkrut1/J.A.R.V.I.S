@@ -9,5 +9,5 @@ Copyright (C) Microsoft Corporation.  All rights reserved.
 /LIBPATH:C:\dev\vcpkg\installed\x64-windows\lib 
 libcurl.lib 
 ws2_32.lib 
-/OUT:C:\Users\egrsk\Desktop\Jarvis\App\bin\test_runner.exe 
+/OUT:C:\Users\egrsk\Documents\GitHub\J.A.R.V.I.S\App\bin\test_runner.exe 
 test_runner.obj 

@@ -1,10 +1,14 @@
 #include "http_server.h"
+#include "core/config/paths.h"
 #include "core/logging/logger.h"
 #include "features/llm/clients/ollama_client.h"
+#include "features/speech/hybrid_tts_manager.h"
+#include "features/speech/engines/windows_tts.h"
+#include "features/speech/engines/voxcpm_tts.h"
 #include "modules/commands/greetings/greeting_provider.h"
 #include "modules/module_manager.h"
 #include <httplib.h>
-#include <nlohmann/json.hpp>
+#include "libs/nlohmann/json.hpp"
 #include <thread>
 #include <deque>
 
@@ -17,9 +21,18 @@ extern std::shared_ptr<GreetingProvider> g_greetingProvider;
 extern ModuleManager* g_moduleManager;
 
 std::string g_status = "idle";
+std::unique_ptr<HybridTTSManager> g_tts;
 
 void startHttpServer() {
     static httplib::Server svr;
+    
+    auto windowsTTS = std::make_shared<WindowsTTS>();
+    auto voxcpmTTS = std::make_shared<VoxCPMTTS>();
+    voxcpmTTS->setServerUrl("http://127.0.0.1:8888/tts");
+    
+    g_tts = std::make_unique<HybridTTSManager>();
+    g_tts->setPrimaryEngine(windowsTTS);
+    g_tts->setFallbackEngine(windowsTTS);
     
     svr.set_pre_routing_handler([](const httplib::Request& req, httplib::Response& res) {
         res.set_header("Access-Control-Allow-Origin", "*");
@@ -61,18 +74,18 @@ void startHttpServer() {
             chatHistory.push_back("Вы: " + userMessage);
             if (chatHistory.size() > MAX_HISTORY_SIZE) chatHistory.pop_front();
             
-            std::string moduleResponse;
+            std::string reply;
+            
             if (g_moduleManager) {
-                moduleResponse = g_moduleManager->handleCommand(userMessage);
+                reply = g_moduleManager->handleCommand(userMessage);
             }
             
-            std::string reply;
-            if (!moduleResponse.empty()) {
-                reply = moduleResponse;
-            } else if (g_llm_instance) {
+            if (reply.empty() && g_llm_instance) {
                 reply = g_llm_instance->ask(userMessage);
-            } else {
-                reply = "LLM не доступен.";
+            }
+            
+            if (reply.empty()) {
+                reply = "Я не понял команду, сэр.";
             }
             
             chatHistory.push_back("Джарвис: " + reply);
@@ -80,6 +93,11 @@ void startHttpServer() {
             
             json response; response["reply"] = reply;
             res.set_content(response.dump(), "application/json; charset=utf-8");
+            
+            std::thread([reply]() {
+                if (g_tts) g_tts->speak(reply);
+            }).detach();
+            
         } catch (...) { res.status = 500; }
     });
     

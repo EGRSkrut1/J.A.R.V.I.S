@@ -1,5 +1,6 @@
 #include "jarvis_app.h"
 #include "core/config/config_manager.h"
+#include "core/config/paths.h"
 #include "core/logging/logger.h"
 #include "core/logging/voice_logger.h"
 #include "features/activation/activation_controller.h"
@@ -73,7 +74,7 @@ struct JarvisApp::Impl {
         g_moduleManager = moduleManager.get();
         
         auto jokeProvider = std::make_shared<JokeProvider>();
-        if (jokeProvider->loadFromFile("C:\\Users\\egrsk\\Desktop\\Jarvis\\Source\\cpp\\modules\\commands\\jokes\\jokes.json")) {
+        if (jokeProvider->loadFromFile(Paths::getJokesJson())) {
             moduleManager->registerCommand(jokeProvider);
             Logger::success("JokeProvider loaded");
         }

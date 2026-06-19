@@ -1,4 +1,5 @@
 #include "config_manager.h"
+#include "core/config/paths.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -56,7 +57,7 @@ struct ConfigManager::Impl {
     }
     
     void loadAll() {
-        const std::string configDir = "C:\\Users\\egrsk\\Desktop\\jarvis\\App\\configs\\";
+        std::string configDir = Paths::getConfigsDir() + "/";
         
         systemPrompt = readFile(configDir + "system_prompt.txt");
         systemsInfo = parseSystemsInfo(readFile(configDir + "systems.json"));

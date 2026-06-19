@@ -7,7 +7,8 @@ set "RED=Red"
 set "CYAN=Cyan"
 set "YELLOW=Yellow"
 
-set "BASE=C:\Users\egrsk\Desktop\Jarvis"
+set "BASE=%~dp0"
+set "BASE=%BASE:~0,-1%"
 set "PYTHON=%BASE%\Services\TTS\VoxCPM2\python\python.exe"
 set "LOG_DIR=%BASE%\App\logs"
 
@@ -147,7 +148,7 @@ if %errorlevel% equ 0 (
 )
 echo.
 
-:: [7/7] Запуск
+:: [7/7] Запуск веб-сервера и J.A.R.V.I.S
 call :color %CYAN% "Запуск веб-интерфейса"
 echo.
 start /B "WebServer" "%PYTHON%" -m http.server 3000 --directory "%BASE%\Source\cpp\web\static" > "%LOG_DIR%\web.log" 2>&1
@@ -169,6 +170,23 @@ call :color %CYAN% "J.A.R.V.I.S готов к работе, сэр."
 echo.
 call :color %CYAN% "Веб-интерфейс: http://localhost:3000"
 echo.
+
+:: [8/8] Запуск мобильного приложения (Flutter)
+call :color %CYAN% "Запуск мобильного приложения J.A.R.V.I.S"
+echo.
+call :progress_bar_fast
+
+set "FLUTTER_APP=%BASE%\Services\MobileApp\jarvis_mobile"
+
+if exist "%FLUTTER_APP%" (
+    cd /d "%FLUTTER_APP%"
+    start /B "J.A.R.V.I.S Mobile" flutter run -d edge
+    call :color %GREEN% " [OK]"
+    echo.
+) else (
+    call :color %YELLOW% " [WARN] Мобильное приложение не найдено: %FLUTTER_APP%"
+    echo.
+)
 
 :: [X/X] Компиляция тестов
 call :color %CYAN% "Компиляция тестов"
@@ -218,4 +236,3 @@ exit /b
 :color
 powershell -command "$Host.UI.RawUI.ForegroundColor = '%1'; Write-Host '%2' -NoNewline; $Host.UI.RawUI.ForegroundColor = 'White'"
 exit /b
-

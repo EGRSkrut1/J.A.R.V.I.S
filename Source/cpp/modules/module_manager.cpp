@@ -1,4 +1,5 @@
 #include "module_manager.h"
+#include "core/config/paths.h"
 #include "core/logging/logger.h"
 #include <algorithm>
 #include <windows.h>
@@ -36,9 +37,9 @@ struct ModuleManager::Impl {
     void playConfirmSound() {
         if (confirmSounds.empty()) return;
         std::uniform_int_distribution<size_t> dist(0, confirmSounds.size() - 1);
-        std::string path = "C:\\Users\\egrsk\\Desktop\\Jarvis\\Resources\\sounds\\" + confirmSounds[dist(rng)];
-        
-        std::string cmd = "start /B C:\\Users\\egrsk\\Desktop\\Jarvis\\Services\\TTS\\VoxCPM2\\ffmpeg\\ffplay.exe -autoexit -nodisp -loglevel quiet \"" + path + "\"";
+        std::string ffplay = Paths::getVoxCPMDir() + "/ffmpeg/ffplay.exe";
+        std::string path = Paths::getSoundsDir() + "/" + confirmSounds[dist(rng)];
+        std::string cmd = "start /B \"" + ffplay + "\" -autoexit -nodisp -loglevel quiet \"" + path + "\"";
         system(cmd.c_str());
     }
     

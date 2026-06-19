@@ -1,4 +1,5 @@
 #include "joke_provider.h"
+#include "core/config/paths.h"
 #include "core/logging/logger.h"
 #include <fstream>
 #include <nlohmann/json.hpp>
@@ -37,11 +38,12 @@ struct JokeProvider::Impl {
         if (jokes.empty()) return "Сэр, шутки закончились.";
         std::uniform_int_distribution<size_t> dist(0, jokes.size() - 1);
         const auto& joke = jokes[dist(rng)];
+        lastJokeText = joke.text;
         
-        // Играем аудио в фоне
         if (!joke.audio.empty()) {
-            std::string path = "C:\\Users\\egrsk\\Desktop\\Jarvis\\Resources\\sounds\\jokes\\" + joke.audio;
-            std::string cmd = "start /B C:\\Users\\egrsk\\Desktop\\Jarvis\\Services\\TTS\\VoxCPM2\\ffmpeg\\ffplay.exe -autoexit -nodisp -loglevel quiet \"" + path + "\"";
+            std::string ffplay = Paths::getVoxCPMDir() + "\\ffmpeg\\ffplay.exe";
+            std::string path = Paths::getSoundsDir() + "\\jokes\\" + joke.audio;
+            std::string cmd = "start /B \"" + ffplay + "\" -autoexit -nodisp -loglevel quiet \"" + path + "\"";
             system(cmd.c_str());
         }
         
@@ -61,4 +63,9 @@ std::string JokeProvider::execute(const std::string& userInput) {
 }
 
 bool JokeProvider::isAvailable() const { return !pImpl->jokes.empty(); }
-bool JokeProvider::loadFromFile(const std::string& path) { return pImpl->loadFromFile(path); }
+bool JokeProvider::loadFromFile(const std::string& path) { 
+    if (path.empty()) {
+        return pImpl->loadFromFile(Paths::getJokesJson());
+    }
+    return pImpl->loadFromFile(path); 
+}

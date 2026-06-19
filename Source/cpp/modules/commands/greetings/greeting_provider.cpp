@@ -1,4 +1,5 @@
 #include "greeting_provider.h"
+#include "core/config/paths.h"
 #include "core/logging/logger.h"
 #include <random>
 #include <ctime>
@@ -25,26 +26,24 @@ struct GreetingProvider::Impl {
     
     void playRandomAudio() const {
         std::uniform_int_distribution<size_t> dist(0, audioFiles.size() - 1);
-        std::string path = "C:\\Users\\egrsk\\Desktop\\Jarvis\\Resources\\sounds\\" + audioFiles[dist(rng)];
+        std::string path = Paths::getSoundsDir() + "\\" + audioFiles[dist(rng)];
         
         std::ifstream test(path);
         if (!test.good()) return;
         test.close();
         
-        std::string cmdLine = "C:\\Users\\egrsk\\Desktop\\Jarvis\\Services\\TTS\\VoxCPM2\\ffmpeg\\ffplay.exe -autoexit -nodisp -loglevel quiet \"" + path + "\"";
+        std::string ffplay = Paths::getVoxCPMDir() + "\\ffmpeg\\ffplay.exe";
         
-        STARTUPINFO si = { sizeof(STARTUPINFO) };
+        STARTUPINFOA si = { sizeof(STARTUPINFOA) };
         PROCESS_INFORMATION pi;
         ZeroMemory(&pi, sizeof(pi));
         
-        char* cmd = new char[cmdLine.length() + 1];
-        strcpy(cmd, cmdLine.c_str());
+        std::string cmdLine = "\"" + ffplay + "\" -autoexit -nodisp -loglevel quiet \"" + path + "\"";
         
-        if (CreateProcess(NULL, cmd, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi)) {
+        if (CreateProcessA(NULL, (LPSTR)cmdLine.c_str(), NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi)) {
             CloseHandle(pi.hProcess);
             CloseHandle(pi.hThread);
         }
-        delete[] cmd;
     }
 };
 

@@ -36,7 +36,7 @@ winmm.lib
 ole32.lib 
 uuid.lib 
 sapi.lib 
-/OUT:C:\Users\egrsk\Desktop\Jarvis\App\bin\jarvis_client.exe 
+/OUT:C:\Users\egrsk\Documents\GitHub\J.A.R.V.I.S\App\bin\jarvis_client.exe 
 main.obj 
 jarvis_app.obj 
 config_manager.obj 
