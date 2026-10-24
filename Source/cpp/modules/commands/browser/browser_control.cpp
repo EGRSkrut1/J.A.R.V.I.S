@@ -19,12 +19,13 @@ struct BrowserControl::Impl {
     }
     
     void openUrl(const std::string& url) {
-        std::string cmd = "start \"\" " + url;
+        // ВАЖНО: start "" — пустой заголовок
+        std::string cmd = "start \"\" \"" + url + "\"";
         system(cmd.c_str());
     }
     
     void launchBrowser() {
-        system("start https://google.com");
+        system("start \"\" https://google.com");
         Sleep(3000);
     }
 };

@@ -1,0 +1,9 @@
+{
+  "jokes": [
+    {"id":"1","text":"Текст шутки","audio":"joke1.wav"},
+    {"id":"2","text":"Текст шутки","audio":"joke2.wav"},
+    {"id":"3","text":"Текст шутки","audio":"joke3.wav"},
+    {"id":"4","text":"Текст шутки","audio":"joke4.wav"},
+    {"id":"5","text":"Текст шутки","audio":"joke5.wav"}
+  ]
+}

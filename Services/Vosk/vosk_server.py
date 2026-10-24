@@ -12,7 +12,7 @@ except ImportError as e:
     print(f"Import error: {e}", flush=True)
     sys.exit(1)
 
-MODEL_PATH = r"C:\Users\egrsk\Desktop\Jarvis\Services\Vosk"
+MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 SAMPLE_RATE = 16000
 
 if not os.path.exists(os.path.join(MODEL_PATH, "am")):

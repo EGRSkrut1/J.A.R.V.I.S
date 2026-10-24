@@ -1,63 +1,61 @@
-# J.A.R.V.I.S - Voice Assistant
+# J.A.R.V.I.S — Local Voice Assistant
 
-Voice assistant with speech recognition, LLM integration, and app management.
+J.A.R.V.I.S is a modular client-server voice control system inspired by Iron Man. It runs locally, without clouds or subscriptions. It controls your smart home and applications, and answers questions using neural networks.
 
-## Stack
+## Full Feature List
 
-- C++17, MSVC
-- Vosk (speech recognition)
-- Windows TTS + VoxCPM2 (speech synthesis)
-- Ollama + llama3.1:8b (LLM)
-- cpp-httplib (web server)
-- HTML/CSS/JS (frontend)
+### 1. Voice Interaction
+- Speech recognition (Vosk).
+- Wake word activation ("Jarvis").
+- Speech synthesis (Windows TTS / VoxCPM2).
+- OK sound playback when commands are executed.
 
-## Commands
+### 2. Smart Home Control (IoT)
+- Turn the tree on/off (ESP32) over HTTP.
+- Context-aware routing (room binding via `terminal_id`).
 
-"joke", "anecdote" - Joke,
-"music", "open Spotify" - Launch Spotify,
-"favorite tracks" = Saved tracks,
-"next" / "pause" = Control,
-"turn on/off shuffle" = Shuffle,
-"volume [0-100]" = Spotify volume,
-"browser", "open browser" = Launch browser,
-"find [query]" = Google search,
-"available commands" = Help,
-Other questions - LLM.
+### 3. Application Control
+- Launch Steam, Discord, DS4Windows, Happ VPN, zapret.
+- Spotify control (pause, next track, volume, search).
+- Launch games from the Steam library by name (via Web API).
 
-## Launching
+### 4. LLM Integration
+- Free-form dialogue (Ollama llama3.1:8b).
+- Tool Calling (invoking `execute_system_command`).
+- System information extraction (date, time).
+- Internet search (via tool calling).
 
-1. Install Ollama: `ollama pull llama3.1:8b`
-2. Install dependencies: `pip install vosk pyaudio websockets`
-3. Run `1startjarvis.bat` (administrator)
+### 5. Clients and Interfaces
+- Web interface (login, chat, settings, admin panel).
+- Telegram bot (admin/user roles, control, system status).
 
-## Known issues
+### 6. Security and Architecture
+- Token-based authentication.
+- Role separation (admin/user).
+- Modular architecture (Strategy, Command, Plugin, DI, Facade, Observer).
+- Multithreading (TTS, HTTP, WebSocket).
 
-- Paths are hardcoded!
-- VoxCPM2 is disabled (long loading time of 30-90 seconds)
-- LLM without internet, sometimes hallucinates
-- Vosk sometimes buffers commands
+## Technologies
+- **Language:** C++17, Python 3.10, Dart (Flutter).
+- **Server:** cpp-httplib, libcurl, nlohmann/json.
+- **Neural networks:** Ollama (llama3.1:8b), Vosk (STT), VoxCPM2 (TTS).
+- **Microcontrollers:** ESP32-C6 (PlatformIO).
+
+## Installation and Launch
+1. Install Visual Studio 2022 with the "Desktop development with C++" workload.
+2. Install Ollama and download the model: `ollama pull llama3.1:8b`.
+3. Install the Python dependencies (the script will do it automatically).
+4. Run `Start_All.bat` (as administrator).
+
+## Configuration
+Before launching, copy the templates and configure them:
+- `App/configs/apps_template.json` -> `apps.json` (application paths).
+- `App/configs/network_template.json` -> `network.json` (Wi-Fi for ESP).
+- `App/configs/steam_api_template.json` -> `steam_api.json` (Steam API key).
+- `App/configs/telegram_template.json` -> `telegram.json` (bot token).
+- `App/configs/devices_template.json` -> `devices.json` (smart device IPs).
+- `App/configs/users_template.json` -> `users.json` (users and roles).
 
 ## License
-```
-MIT License
-
-Copyright (c) 2026 EGRSKRUT
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
----
+**PolyForm Noncommercial License 1.0.0**
+The project is distributed for educational and noncommercial purposes. Commercial use without the author's permission is prohibited.

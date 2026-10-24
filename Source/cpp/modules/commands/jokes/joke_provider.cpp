@@ -1,4 +1,5 @@
 #include "joke_provider.h"
+#include "core/config/paths.h"
 #include "core/logging/logger.h"
 #include <fstream>
 #include <nlohmann/json.hpp>
@@ -13,9 +14,10 @@ struct JokeProvider::Impl {
     std::vector<Joke> jokes;
     mutable std::mt19937 rng;
     std::string lastJokeText;
-    
+    std::string lastJokeAudio;
+
     Impl() : rng(std::time(nullptr)) {}
-    
+
     bool loadFromFile(const std::string& path) {
         std::ifstream file(path);
         if (!file.is_open()) return false;
@@ -28,23 +30,23 @@ struct JokeProvider::Impl {
                 j.audio = item.value("audio", "");
                 if (!j.id.empty() && !j.text.empty()) jokes.push_back(j);
             }
-            Logger::success("JokeProvider: loaded " + std::to_string(jokes.size()) + " jokes");
             return true;
         } catch (...) { return false; }
     }
-    
-    std::string getRandomJokeAndPlay() {
+
+    std::string getRandomJokeAndPlay(bool playAudio) {
         if (jokes.empty()) return "Сэр, шутки закончились.";
         std::uniform_int_distribution<size_t> dist(0, jokes.size() - 1);
         const auto& joke = jokes[dist(rng)];
-        
-        // Играем аудио в фоне
-        if (!joke.audio.empty()) {
-            std::string path = "C:\\Users\\egrsk\\Desktop\\Jarvis\\Resources\\sounds\\jokes\\" + joke.audio;
-            std::string cmd = "start /B C:\\Users\\egrsk\\Desktop\\Jarvis\\Services\\TTS\\VoxCPM2\\ffmpeg\\ffplay.exe -autoexit -nodisp -loglevel quiet \"" + path + "\"";
+        lastJokeText = joke.text;
+        lastJokeAudio = joke.audio;
+
+        if (playAudio && !joke.audio.empty()) {
+            std::string ffplay = Paths::getVoxCPMDir() + "\\ffmpeg\\ffplay.exe";
+            std::string path = Paths::getSoundsDir() + "\\jokes\\" + joke.audio;
+            std::string cmd = "start \"\" /B \"" + ffplay + "\" -autoexit -nodisp -loglevel quiet \"" + path + "\"";
             system(cmd.c_str());
         }
-        
         return joke.text;
     }
 };
@@ -57,8 +59,20 @@ std::vector<std::string> JokeProvider::getTriggers() const {
 }
 
 std::string JokeProvider::execute(const std::string& userInput) {
-    return pImpl->getRandomJokeAndPlay();
+    return pImpl->getRandomJokeAndPlay(true);
+}
+
+std::string JokeProvider::executeSilent(const std::string& userInput) {
+    return pImpl->getRandomJokeAndPlay(false);
+}
+
+std::string JokeProvider::getLastAudioFile() const {
+    return pImpl->lastJokeAudio;
 }
 
 bool JokeProvider::isAvailable() const { return !pImpl->jokes.empty(); }
-bool JokeProvider::loadFromFile(const std::string& path) { return pImpl->loadFromFile(path); }
+
+bool JokeProvider::loadFromFile(const std::string& path) {
+    if (path.empty()) return pImpl->loadFromFile(Paths::getJokesJson());
+    return pImpl->loadFromFile(path);
+}

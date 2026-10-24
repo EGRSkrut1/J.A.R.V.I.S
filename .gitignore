@@ -1,0 +1,94 @@
+# Secrets and local configs (DO NOT COMMIT!)
+# Ignore ALL json files in configs EXCEPT templates (*_template.json)
+App/configs/*.json
+!App/configs/*_template.json
+
+# Joke censorship and heavy audio files
+Resources/sounds/jokes/*.wav
+Resources/sounds/jokes/*.waw
+
+
+# Wi-Fi password
+Services/EmbeddedDevices/esp/src/config_loader.h
+!Services/EmbeddedDevices/esp/src/config_loader_template.h
+
+# C++ (Visual Studio / MSVC)
+*.obj
+*.exe
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.idb
+*.log
+build/
+Debug/
+Release/
+x64/
+.vs/
+
+# PlatformIO / ESP32 (Services/EmbeddedDevices)
+.pio/
+.pioenvs/
+.piolibdeps/
+.vscode/
+Services/EmbeddedDevices/esp/.pio/
+Services/EmbeddedDevices/esp/.vscode/
+Services/EmbeddedDevices/esp/.gitignore
+Services/EmbeddedDevices/esp/CMakeLists.txt
+Services/EmbeddedDevices/esp/idf_component.yml
+Services/EmbeddedDevices/esp/sdkconfig.old
+Services/EmbeddedDevices/esp/sdkconfig
+Services/EmbeddedDevices/esp/include/
+Services/EmbeddedDevices/esp/lib/
+Services/EmbeddedDevices/esp/test/
+Services/EmbeddedDevices/esp/check_requirements.py
+Services/EmbeddedDevices/esp/build/
+Services/EmbeddedDevices/esp/managed_components/
+Services/EmbeddedDevices/esp/partitions.csv
+Services/EmbeddedDevices/esp/dependencies.lock
+Services/EmbeddedDevices/esp/compile_commands.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Flutter / Dart (Mobile App)
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+*.iml
+Services/MobileApp/jarvis_mobile/.dart_tool/
+Services/MobileApp/jarvis_mobile/.idea/
+Services/MobileApp/jarvis_mobile/build/
+Services/MobileApp/jarvis_mobile/android/.gradle/
+Services/MobileApp/jarvis_mobile/android/local.properties
+Services/MobileApp/jarvis_mobile/ios/Flutter/ephemeral/
+Services/MobileApp/jarvis_mobile/windows/flutter/ephemeral/
+Services/MobileApp/jarvis_mobile/macos/Flutter/ephemeral/
+Services/MobileApp/jarvis_mobile/**/GeneratedPluginRegistrant.*
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project runtime junk
+App/bin/
+App/logs/
+App/temp/
+*.log
+
+# Temporary compilation files
+*.o
+*.a
+*.so
+*.dylib

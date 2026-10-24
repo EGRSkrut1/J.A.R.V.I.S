@@ -8,13 +8,15 @@ class JokeProvider : public ICommand {
 public:
     JokeProvider();
     ~JokeProvider();
-    
+
     std::vector<std::string> getTriggers() const override;
     std::string execute(const std::string& userInput) override;
     bool isAvailable() const override;
-    
+
+    std::string executeSilent(const std::string& userInput);
+    std::string getLastAudioFile() const;
     bool loadFromFile(const std::string& path);
-    
+
 private:
     struct Impl;
     std::unique_ptr<Impl> pImpl;

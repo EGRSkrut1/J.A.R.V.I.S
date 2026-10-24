@@ -2,11 +2,20 @@
 #include <string>
 #include <memory>
 
+/**
+ * @brief Менеджер конфигурации системы.
+ * 
+ * Загружает системный промпт, список систем и маппинг звуков из файлов
+ * в папке App/configs.
+ */
 class ConfigManager {
 public:
     ConfigManager();
     ~ConfigManager();
     
+    /**
+     * @brief Загружает все конфиги с диска.
+     */
     void loadAll();
     
     std::string getSystemPrompt() const;
